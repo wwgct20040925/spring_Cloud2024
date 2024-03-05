@@ -1,18 +1,12 @@
 spring:
-  application:
-    name: cloud-payment-service
   datasource:
     url: jdbc:mysql://localhost:3306/mydb?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: root
     password: WWgct20040925*
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        service-name: ${spring.application.name}
+  profiles:
+    active: dev # 多环境配置加载内容dev/prod,不写就是默认default配置
 #  #统一时间格式
 #  jackson:
 #    date-format: yyyy-mm-dd HH:mm:ss

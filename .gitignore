@@ -1,0 +1,4 @@
+# 项目排除路径
+/cloud-api-commons/target/
+/cloud-consumer-order8002/target/
+/cloud-provider-payment8001/target/

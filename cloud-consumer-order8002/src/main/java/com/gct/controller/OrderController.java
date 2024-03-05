@@ -27,6 +27,7 @@ public class OrderController {
     @GetMapping("get/{id}")
     public ResultData get(@PathVariable("id") int id) {
         ResponseEntity<ResultData> forEntity = restTemplate.getForEntity(PaymentSrv_URL + "/pay/get/" + id, ResultData.class);
+        System.out.println("gct");
         return forEntity.getBody();
     }
 }

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +18,8 @@ public class PayController {
     @Resource
     private PayService payService;
 
+    @Value("${com.gct}")
+    private String zlq;
     @PostMapping ("add")
     @Operation(summary = "新增",description = "新增支付流水方法,json串做参数")
     private ResultData add(@RequestBody Pay pay){
@@ -40,6 +43,10 @@ public class PayController {
     @Operation(summary = "按照ID查流水",description = "查询支付流水方法")
     public ResultData get(@PathVariable("id") int id){
         return payService.get(id);
+    }
+    @GetMapping("show")
+    private String show(){
+        return zlq;
     }
 
 

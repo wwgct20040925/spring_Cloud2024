@@ -11,8 +11,9 @@
     <modules>
 
         <module>cloud-provider-payment8001</module>
-        <module>cloud-consumer-order8002</module>
+        <module>cloud-consumer-order8000</module>
         <module>cloud-api-commons</module>
+        <module>cloud-provider-payment8002</module>
     </modules>
     <properties>
         <maven.compiler.source>20</maven.compiler.source>

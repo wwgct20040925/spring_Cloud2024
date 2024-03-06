@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydb?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: WWgct20040925*
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  profiles:
+    active: dev # 多环境配置加载内容dev/prod,不写就是默认default配置
+#  #统一时间格式
+#  jackson:
+#    date-format: yyyy-mm-dd HH:mm:ss
+#    time-zone: GMT+8
+
+mybatis-plus:
+  #mapper的扫描包
+  mapper-locations: classpath:mapper/*.xml
+  #实体类的扫描包，可任意不用写全限定符
+  type-aliases-package: com.gct.pojo
+  global-config:
+    db-config:
+      #逻辑删除字段
+      logic-delete-field: deleted
+      #主键自增长
+      id-type: auto
+server:
+  port: 8002

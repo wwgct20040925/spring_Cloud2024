@@ -39,4 +39,12 @@ public class ResultData<T> {
         return resultData;
     }
 
+    public static <T> ResultData<T> fail(ReturnCodeEnum returnCodeEnum,String message) {
+        ResultData<T> resultData = new ResultData<>();
+        resultData.setCode(resultData.getCode());
+        resultData.setMessage(message);
+        return resultData;
+    }
+
+
 }

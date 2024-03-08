@@ -1,5 +1,6 @@
 package com.gct.controller;
 
+import cn.hutool.core.io.unit.DataUnit;
 import com.gct.pojo.Pay;
 import com.gct.result.ResultData;
 import com.gct.service.PayService;
@@ -9,6 +10,8 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("pay")
@@ -40,6 +43,11 @@ public class PayController {
     @GetMapping("get/{id}")
     @Operation(summary = "按照ID查流水",description = "查询支付流水方法")
     public ResultData get(@PathVariable("id") int id){
+        try {
+            TimeUnit.SECONDS.sleep(62);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return payService.get(id);
     }
 

@@ -1,0 +1,38 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: cloud-consumer-feign-order
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+    openfeign:
+      client:
+        config:
+          default:
+            #连接超时时间
+            connectTimeout: 4000
+            #读取超时时间
+            readTimeout: 4000
+          cloud-payment-service:
+            connectTimeout: 2000  # 连接超时时间，单位为毫秒，默认为 5000 毫秒
+            readTimeout:    2000  # 读取超时时间，单位为毫秒，默认为 10000 毫秒
+      httpclient:
+        hc5:
+          enabled: true           #Apache HttpClient5 配置开启
+      compression:
+        request:
+          enabled: true
+          min-request-size: 2048 #最小触发压缩的大小
+          mime-types: text/xml,application/xml,application/json #触发压缩数据类型
+        response:
+          enabled: true
+logging:
+  level:
+    com:
+      gct:
+        api:
+          PayFeignApi: debug

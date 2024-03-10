@@ -1,8 +1,6 @@
 package com.gct.controller;
 
-import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.io.unit.DataUnit;
 import com.gct.api.PayFeignApi;
 import com.gct.pojo.PayDTO;
 import com.gct.result.ResultData;
@@ -22,7 +20,7 @@ public class OrderController {
         return payFeignApi.addPay(payDTO);
 
     }
-    @GetMapping("get/{id}")
+    @GetMapping(value = "get/{id}")
     public ResultData getById(@PathVariable("id") int id){
         ResultData resultData;
         try {

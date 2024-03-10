@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class Error {
 
-    @ExceptionHandler(ArithmeticException.class)
+    @ExceptionHandler(Exception.class)
     public ResultData ArithmeticException(Exception e){
         return ResultData.fail(ReturnCodeEnum.RC375);
     }

@@ -34,14 +34,14 @@ public class ResultData<T> {
 //    }
     public static <T> ResultData<T> fail(ReturnCodeEnum returnCodeEnum) {
         ResultData<T> resultData = new ResultData<>();
-        resultData.setCode(resultData.getCode());
-        resultData.setMessage(resultData.getMessage());
+        resultData.setCode(returnCodeEnum.getCode());
+        resultData.setMessage(returnCodeEnum.getMessage());
         return resultData;
     }
 
     public static <T> ResultData<T> fail(ReturnCodeEnum returnCodeEnum,String message) {
         ResultData<T> resultData = new ResultData<>();
-        resultData.setCode(resultData.getCode());
+        resultData.setCode(returnCodeEnum.getCode());
         resultData.setMessage(message);
         return resultData;
     }

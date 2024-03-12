@@ -54,6 +54,9 @@ public class PayServiceImpl extends ServiceImpl<PayMapper, Pay>
             return ResultData.fail(ReturnCodeEnum.RC500);
         }
     }
+
+
+
     @Override
     public ResultData get(int i) {
         Pay pay = payMapper.selectById(i);
@@ -63,6 +66,15 @@ public class PayServiceImpl extends ServiceImpl<PayMapper, Pay>
         else{
             return ResultData.fail(ReturnCodeEnum.RC999);
         }
+    }
+
+    @Override
+    public ResultData gatewayByid(int id) {
+        Pay pay = payMapper.selectById(id);
+        if(pay!=null){
+            return ResultData.success(pay);
+        }
+        else return ResultData.fail(ReturnCodeEnum.RC999);
     }
 }
 

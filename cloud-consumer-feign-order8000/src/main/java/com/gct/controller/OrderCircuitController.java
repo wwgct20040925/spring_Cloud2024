@@ -75,6 +75,12 @@ public class OrderCircuitController {
         // 这里是容错处理逻辑，返回备用结果
         return CompletableFuture.supplyAsync(()-> "myPoolBulkheadFallback，系统繁忙，请稍后再试-----/(ㄒoㄒ)/~~");
     }
+
+    /**
+     * 测试线程池隔离
+     * @param id
+     * @return
+     */
     @GetMapping("/rateLimit/{id}")
     @RateLimiter(name = "cloud-payment-service",fallbackMethod = "myRateLimitFallback")
     public String myRateLimit(@PathVariable("id") Integer id){

@@ -3,13 +3,14 @@ package com.gct.api;
 import com.gct.config.PayFeignConfig;
 import com.gct.pojo.PayDTO;
 import com.gct.result.ResultData;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value = "cloud-payment-service",configuration = {PayFeignConfig.class})
+@FeignClient(value = "gateway9527",configuration = {PayFeignConfig.class})
 public interface PayFeignApi {
 
     @PostMapping("pay/add")
@@ -52,4 +53,32 @@ public interface PayFeignApi {
      */
     @GetMapping(value = "/pay/ratelimit/{id}")
     public String myRatelimit(@PathVariable("id") Integer id);
+    /**
+     * 测试分布式链路追踪
+     */
+    @GetMapping("/pay/micrometer/{id}")
+    public String micrometer(@PathVariable("id") int id);
+
+    /**
+     * 测试网关查询
+     * @param id
+     * @return
+     */
+    @GetMapping("pay/gateway/get/{id}")
+    public ResultData gatewayById(@PathVariable("id") int id);
+
+    /**
+     * 测试网关查询2
+     * @return
+     */
+    @GetMapping(value = "pay/gateway/info")
+    public ResultData<String> getGatewayInfo();
+
+    /**
+     * 测试网关过滤器
+     * @param request
+     * @return
+     */
+    @GetMapping(value = "pay/gateway/filter")
+    public ResultData<String> getGatewayFilter(HttpServletRequest request);
 }

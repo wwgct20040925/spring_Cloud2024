@@ -18,4 +18,6 @@ public interface PayService extends IService<Pay> {
     ResultData updateByid(Pay pay);
 
     ResultData get(int i);
+
+    ResultData gatewayByid(int id);
 }

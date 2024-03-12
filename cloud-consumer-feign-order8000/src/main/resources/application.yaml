@@ -40,33 +40,12 @@ logging:
       gct:
         api:
           PayFeignApi: debug
-#
+
 
 
 
 
 #基于次数窗口的服务熔断加服务降级
-#resilience4j:
-#  circuitbreaker:
-#    configs:
-#      default:
-#        failure-rate-threshold: 50      #设置50%的调用失败时打开断路器，超过失败请求百分⽐CircuitBreaker变为OPEN状态。
-#        sliding-window-type: TIME_BASED # 滑动窗口的类型
-#        slow-call-duration-threshold:   #慢调用时间阈值，高于这个阈值的视为慢调用并增加慢调用比例。
-#          seconds: 2
-#        slow-call-rate-threshold: 30    #慢调用百分比峰值，断路器把调用时间⼤于slowCallDurationThreshold，视为慢调用，当慢调用比例高于阈值，断路器打开，并开启服务降级
-#        sliding-window-size: 6          #滑动窗口的大小配置，配置TIME_BASED表示6秒
-#        minimum-number-of-calls: 2      #断路器计算失败率或慢调用率之前所需的最小样本(每个滑动窗口周期)。
-#        wait-duration-in-open-state:    #从OPEN到HALF_OPEN状态需要等待的时间
-#          seconds: 5
-#        permitted-number-of-calls-in-half-open-state: 2   #半开状态允许的最大请求数，默认值为10
-#        record-exceptions:              #记录为失败并因此增加失败率的异常列表。
-#          - java.lang.Exception
-#    instances:
-#      cloud-payment-service:
-#        baseConfig: default
-
-#基于时间窗口的服务熔断加服务降级
 #resilience4j:
 #  timelimiter:
 #    configs:
@@ -89,21 +68,43 @@ logging:
 #      cloud-payment-service:
 #        baseConfig: default
 
+#基于时间窗口的服务熔断加服务降级
+#resilience4j:
+#  circuitbreaker:
+#    configs:
+#      default:
+#        failure-rate-threshold: 50      #设置50%的调用失败时打开断路器，超过失败请求百分⽐CircuitBreaker变为OPEN状态。
+#        sliding-window-type: TIME_BASED # 滑动窗口的类型
+#        slow-call-duration-threshold:   #慢调用时间阈值，高于这个阈值的视为慢调用并增加慢调用比例。
+#          seconds: 2
+#        slow-call-rate-threshold: 30    #慢调用百分比峰值，断路器把调用时间⼤于slowCallDurationThreshold，视为慢调用，当慢调用比例高于阈值，断路器打开，并开启服务降级
+#        sliding-window-size: 6          #滑动窗口的大小配置，配置TIME_BASED表示6秒
+#        minimum-number-of-calls: 2      #断路器计算失败率或慢调用率之前所需的最小样本(每个滑动窗口周期)。
+#        wait-duration-in-open-state:    #从OPEN到HALF_OPEN状态需要等待的时间
+#          seconds: 5
+#        permitted-number-of-calls-in-half-open-state: 2   #半开状态允许的最大请求数，默认值为10
+#        record-exceptions:              #记录为失败并因此增加失败率的异常列表。
+#          - java.lang.Exception
+#    instances:
+#      cloud-payment-service:
+#        baseConfig: default
+
+
 #信号量舱壁隔离
-resilience4j:
-  bulkhead:
-    configs:
-      default:
-        max-concurrent-calls: 2 # 隔离允许并发线程执行的最大数量
-        max-wait-duration:
-          seconds: 1    # 当达到并发调用数量时，新的线程的阻塞时间，我只愿意等待1秒，过时不候进舱壁兜底fallback
-    instances:
-      cloud-payment-service:
-        baseConfig: default
-  timelimiter:
-    configs:
-      default:
-        timeout-duration: 10s  #神坑的位置，timelimiter 默认限制远程1s，超于1s就超时异常，配置了降级，就走降级逻辑
+#resilience4j:
+#  bulkhead:
+#    configs:
+#      default:
+#        max-concurrent-calls: 2 # 隔离允许并发线程执行的最大数量
+#        max-wait-duration:
+#          seconds: 1    # 当达到并发调用数量时，新的线程的阻塞时间，我只愿意等待1秒，过时不候进舱壁兜底fallback
+#    instances:
+#      cloud-payment-service:
+#        baseConfig: default
+#  timelimiter:
+#    configs:
+#      default:
+#        timeout-duration: 10s  #神坑的位置，timelimiter 默认限制远程1s，超于1s就超时异常，配置了降级，就走降级逻辑
 
 
 
